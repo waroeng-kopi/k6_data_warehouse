@@ -1,0 +1,3 @@
+Berdasarkan conceptual data modeling yang telah dibuat, tabel fakta (FACT table) yang dapat ditentukan adalah tabel **SALES**. Ini karena penjualan (sales) merupakan entitas utama yang mencatat transaksi penjualan yang terjadi di sistem point of sales.
+
+Tabel SALES akan mencatat setiap transaksi penjualan yang terjadi, termasuk informasi seperti tanggal penjualan, total jumlah penjualan, metode pembayaran, ID pelanggan, ID karyawan yang melakukan penjualan, dan ID diskon (jika ada). Ini akan menjadi titik sentral dalam menganalisis kinerja penjualan, tren penjualan, dan lainnya dalam sistem point of sales tersebut.
