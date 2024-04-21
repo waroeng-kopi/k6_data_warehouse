@@ -315,7 +315,7 @@ INSERT INTO SaleDetail (SaleDetailID, SaleID, ProductID, Quantity, UnitPrice, Su
 
 INSERT INTO Payment (PaymentID, SaleID, Amount, PaymentMethod, PaymentDate, Notes) VALUES
 (1, 1, 150.99, 'Credit Card', '2024-04-20', 'Payment successful'),
-(2, 2, 99.99, 'Cash', '2024-04-20', 'Exact change provided'),
+(2, 2, 99.99, 'Cash', '2024-04-20rgetar', 'Exact change provided'),
 (3, 3, 229.98, 'Debit Card', '2024-04-21', 'Transaction ID: 123456'),
 (4, 4, 49.99, 'Cash', '2024-04-22', 'Exact change provided'),
 (5, 5, 349.99, 'Credit Card', '2024-04-23', 'Payment successful'),
@@ -375,3 +375,42 @@ INSERT INTO Discount (DiscountID, SaleID, Amount, Percentage) VALUES
 (16, 35, NULL, 5.00),
 (17, 36, 5.00, NULL),
 (18, 39, 10.00, NULL);
+
+
+-- Tabel Dimensi
+
+CREATE TABLE DimCustomer (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Email VARCHAR(255),
+    Phone VARCHAR(20),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE DimEmployee (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Position VARCHAR(100),
+    Email VARCHAR(255),
+    Phone VARCHAR(20)
+);
+
+CREATE TABLE DimProduct (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    CategoryID INT,
+    Brand VARCHAR(100),
+    Price DECIMAL(10, 2),
+    Description TEXT
+);
+
+CREATE TABLE DimDiscount (
+    DiscountID INT PRIMARY KEY,
+    Amount DECIMAL(10, 2),
+    Percentage DECIMAL(5, 2)
+);
+
+CREATE TABLE DimPaymentMethod (
+    MethodID INT PRIMARY KEY,
+    MethodName VARCHAR(100)
+);
