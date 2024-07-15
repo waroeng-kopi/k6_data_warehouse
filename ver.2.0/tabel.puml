@@ -1,0 +1,142 @@
+@startuml
+
+entity "ProductCategories" as pc {
+    +CategoryID: INT (PK)
+    --
+    CategoryName: VARCHAR(255)
+    Description: TEXT
+}
+
+entity "Suppliers" as s {
+    +SupplierID: INT (PK)
+    --
+    SupplierName: VARCHAR(255)
+    ContactNumber: VARCHAR(50)
+    Email: VARCHAR(255)
+    Address: TEXT
+}
+
+entity "Products" as p {
+    +ProductID: INT (PK)
+    --
+    ProductName: VARCHAR(255)
+    CategoryID: INT (FK)
+    SupplierID: INT (FK)
+    UnitPrice: DECIMAL(10, 2)
+    Stock: INT
+    TypeID: INT (FK)
+}
+
+entity "ProductTypes" as pt {
+    +TypeID: INT (PK)
+    --
+    TypeName: VARCHAR(255)
+    Description: TEXT
+}
+
+entity "Customers" as c {
+    +CustomerID: INT (PK)
+    --
+    CustomerName: VARCHAR(255)
+    ContactNumber: VARCHAR(50)
+    Email: VARCHAR(255)
+    Address: TEXT
+}
+
+entity "Employees" as e {
+    +EmployeeID: INT (PK)
+    --
+    EmployeeName: VARCHAR(255)
+    ContactNumber: VARCHAR(50)
+    Email: VARCHAR(255)
+    Position: VARCHAR(255)
+}
+
+entity "Orders" as o {
+    +OrderID: INT (PK)
+    --
+    CustomerID: INT (FK)
+    EmployeeID: INT (FK)
+    OrderDate: DATE
+    TotalAmount: DECIMAL(10, 2)
+}
+
+entity "OrderDetails" as od {
+    +OrderDetailID: INT (PK)
+    --
+    OrderID: INT (FK)
+    ProductID: INT (FK)
+    Quantity: INT
+    UnitPrice: DECIMAL(10, 2)
+    TotalPrice: DECIMAL(10, 2)
+}
+
+entity "Inventory" as i {
+    +ProductID: INT (PK, FK)
+    --
+    QuantityInStock: INT
+}
+
+entity "Consignments" as con {
+    +ConsignmentID: INT (PK)
+    --
+    SupplierID: INT (FK)
+    ProductID: INT (FK)
+    ConsignmentDate: DATE
+    Quantity: INT
+    Status: VARCHAR(50)
+}
+
+entity "Procurement" as pro {
+    +ProcurementID: INT (PK)
+    --
+    ProductID: INT (FK)
+    SupplierID: INT (FK)
+    OrderDate: DATE
+    DeliveryDate: DATE
+    Quantity: INT
+    Status: VARCHAR(50)
+}
+
+entity "Discounts" as d {
+    +DiscountID: INT (PK)
+    --
+    DiscountName: VARCHAR(255)
+    DiscountType: VARCHAR(50) -- e.g., 'Percentage', 'Flat Amount'
+    DiscountValue: DECIMAL(10, 2)
+    StartDate: DATE
+    EndDate: DATE
+}
+
+entity "ProductDiscounts" as pd {
+    +ProductDiscountID: INT (PK)
+    --
+    ProductID: INT (FK)
+    DiscountID: INT (FK)
+}
+
+entity "OrderDiscounts" as odc {
+    +OrderDiscountID: INT (PK)
+    --
+    OrderID: INT (FK)
+    DiscountID: INT (FK)
+}
+
+p }|--|| pc
+p }|--|| pt
+p }|--|| s
+o }|--|| c
+o }|--|| e
+od }|--|| o
+od }|--|| p
+i }|--|| p
+con }|--|| p
+con }|--|| s
+pro }|--|| p
+pro }|--|| s
+pd }|--|| p
+pd }|--|| d
+odc }|--|| o
+odc }|--|| d
+
+@enduml
